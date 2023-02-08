@@ -16,9 +16,17 @@ async function listTeam(userId) {
       [userId]);
 }
 
+async function deleteTeam(userId, teamId) {
+    return db.query(`
+        DELETE FROM teams
+        WHERE "userId"=$1 AND id=$2`, 
+      [userId, teamId]);
+}
+
 const teamsRepository = {
     createTeam,
-    listTeam
+    listTeam,
+    deleteTeam
 };
   
 export default teamsRepository;
