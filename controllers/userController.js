@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { verifyToken } from '../middlewares/authMiddleware.js';
 import usersRepository from '../repositories/usersRepository.js';
 import authService from '../services/authService.js';
 
@@ -35,4 +36,8 @@ export async function login(req, res) {
     }
   
     res.sendStatus(401);
-  }
+}
+
+export async function validateToken(req, res) {
+  res.send(res.locals.user)
+}
