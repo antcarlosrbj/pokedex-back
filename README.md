@@ -29,4 +29,12 @@ $ npm start
         "password": "123",
         "confirmPassword": "123"
     }
+
+- POST /login
+    - Route to login
+    - headers: {}
+    - body: {
+        "email": "carlos@carlos.com",
+        "password": "123"
+    }
 ```
