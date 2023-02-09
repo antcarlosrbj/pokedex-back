@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { verifyToken } from '../middlewares/authMiddleware.js';
 import usersRepository from '../repositories/usersRepository.js';
 import authService from '../services/authService.js';
 
@@ -8,10 +7,11 @@ export async function createUser(req, res) {
     
     try {
       const existingUsers = await usersRepository.getUserByEmail(user.email)
-      if (existingUsers.rowCount > 0) {
+
+      if (existingUsers.rows.length > 0) {
         return res.sendStatus(409);
       }
-  
+
       const {name, email, password} = user;
       await usersRepository.createUser(name, email, password);
   

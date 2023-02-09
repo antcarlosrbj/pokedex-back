@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export async function allPokemons(req, res) {
 
   const page = req.query.page || 1
@@ -22,4 +24,24 @@ export async function allPokemons(req, res) {
       })
     )
   })
+}
+
+export async function getPokemon(req, res) {
+
+  const pokemonId = req.params.pokemonId;
+
+  const promisse = axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+
+  promisse.then(answer => {
+    return res.send({
+      name: answer.data.name,
+      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/" + pokemonId + ".svg",
+      stats: answer.data.stats.map(sta => {
+        return {
+          statName: sta.stat.name,
+          statValue: sta.base_stat
+        }
+      })
+    });
+  });
 }

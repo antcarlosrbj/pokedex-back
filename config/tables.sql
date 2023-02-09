@@ -15,7 +15,8 @@ CREATE TABLE teams (
 
 CREATE TABLE pokemons (
    id SERIAL PRIMARY KEY,
-   "userId" INTEGER NOT NULL REFERENCES users(id),
-   name TEXT NOT NULL UNIQUE,
+   "teamId" INTEGER NOT NULL REFERENCES teams(id),
+   "pokemonId" INTEGER NOT NULL,
+   "speciesId" INTEGER NOT NULL,
    "createdAt" TIMESTAMP DEFAULT NOW()
 );
